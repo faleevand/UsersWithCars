@@ -15,22 +15,28 @@ public class MainApp {
               new AnnotationConfigApplicationContext(AppConfig.class);
 
       UserService userService = context.getBean(UserService.class);
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
-      userService.add(new User("User5", "Lastname5", "user5@mail.ru"));
-      userService.add(new User("User6", "Lastname6", "user6@mail.ru"));
 
       Car car1 = new Car("Ford", 33);
       Car car2 = new Car("Kia", 55);
       Car car3 = new Car("BMW", 777);
-      Car car4 = new Car("BMW", 777);
-      userService.setCarForUser(1, car1);
-      userService.setCarForUser(2, car2);
-      userService.setCarForUser(3, car3);
-      userService.setCarForUser(5, car4);
+      Car car4 = new Car("BMW", 6);
 
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+      user1.setCar(car1);
+      userService.add(user1);
+      User user2 = new User("User2", "Lastname2", "user2@mail.ru");
+      user2.setCar(car2);
+      userService.add(user2);
+      User user3 = new User("User3", "Lastname3", "user3@mail.ru");
+      user3.setCar(car3);
+      userService.add(user3);
+      User user4 = new User("User4", "Lastname4", "user4@mail.ru");
+      user4.setCar(car4);
+      userService.add(user4);
+      User user5 = new User("User5", "Lastname5", "user5@mail.ru");
+      userService.add(user5);
+      User user6 = new User("User6", "Lastname6", "user6@mail.ru");
+      userService.add(user6);
 
       try {
          List<User> users = userService.listUsers();
@@ -43,10 +49,9 @@ public class MainApp {
             System.out.println(user);
          }
          System.out.println("-----------------------------------------------------------------------------------");
-         List<User> uscars = userService.getUserByCar("BMW", 777);
-         for (User us : uscars) {
-            System.out.println(us);
-         }
+         User uscars = userService.getUserByCar("BMW", 777);
+         System.out.println(uscars);
+
       } finally {
          context.close();
       }
